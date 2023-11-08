@@ -7,18 +7,21 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.List;
 
 @Data
 @AllArgsConstructor
-public class Orcamento {
+public class Orcamento implements Orcavel {
 
     private BigDecimal valor;
-    private int quantidadeItens;
-    private SituacaoOrcamento situacao = new EmAnalise();
+    private List<Orcavel> itens;
+    private SituacaoOrcamento situacao;
 
-    public Orcamento(BigDecimal valor, int quantidadeItens) {
-        this.valor = valor;
-        this.quantidadeItens = quantidadeItens;
+    public Orcamento() {
+        this.valor = BigDecimal.ZERO;
+        this.situacao = new EmAnalise();
+        this.itens = new ArrayList<>();
     }
 
     public void aplicarDescontoExtra() {
@@ -42,4 +45,12 @@ public class Orcamento {
         return situacao instanceof Finalizado;
     }
 
+    public void adicionarItem(Orcavel item) {
+        this.valor = valor.add(item.getValor());
+        this.itens.add(item);
+    }
+
+    public int getQuantidadeItens() {
+        return itens.size();
+    }
 }

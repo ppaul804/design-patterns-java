@@ -1,6 +1,7 @@
 package br.com.alura;
 
 import br.com.alura.loja.desconto.CalculadoraDeDescontos;
+import br.com.alura.loja.orcamento.ItemOrcamento;
 import br.com.alura.loja.orcamento.Orcamento;
 import br.com.alura.loja.pedido.GerarPedido;
 import br.com.alura.loja.pedido.GerarPedidoHandler;
@@ -25,9 +26,12 @@ public class Application implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-        Orcamento primeiro = new Orcamento(new BigDecimal("200"), 6);
-        Orcamento segundo = new Orcamento(new BigDecimal("1000"), 2);
-        Orcamento terceiro = new Orcamento(new BigDecimal("500"), 1);
+        Orcamento primeiro = new Orcamento();
+        primeiro.adicionarItem(new ItemOrcamento(new BigDecimal("200")));
+        Orcamento segundo = new Orcamento();
+        segundo.adicionarItem(new ItemOrcamento(new BigDecimal("1000")));
+        Orcamento terceiro = new Orcamento();
+        terceiro.adicionarItem(new ItemOrcamento(new BigDecimal("500")));
 
         CalculadoraDeDescontos calculadora = new CalculadoraDeDescontos();
         log.info("{}", calculadora.calcular(primeiro));
