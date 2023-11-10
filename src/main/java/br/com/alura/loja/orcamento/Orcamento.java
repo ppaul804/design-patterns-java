@@ -24,6 +24,15 @@ public class Orcamento implements Orcavel {
         this.itens = new ArrayList<>();
     }
 
+    public BigDecimal getValor() {
+        try {
+            Thread.sleep(2000);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+        return this.valor;
+    }
+
     public void aplicarDescontoExtra() {
         BigDecimal valorDescontoExtra = this.situacao.calcularDescontoExtra(this);
         this.valor = this.valor.subtract(valorDescontoExtra);
